@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Box, VStack, Text, Button, ButtonText, Heading, Center } from '@gluestack-ui/themed';
+import { Box, VStack, HStack, Text, Button, ButtonText, Heading, Center } from '@gluestack-ui/themed';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useToken } from '@gluestack-style/react';
 import { useRouter } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { NotificationService } from '../src/infrastructure/notifications/NotificationService';
@@ -9,6 +11,7 @@ export default function Onboarding() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const insets = useSafeAreaInsets();
+  const iconColor = useToken('colors', 'textLight800');
 
   const handleStart = async () => {
     setLoading(true);
@@ -37,11 +40,16 @@ export default function Onboarding() {
           <Heading size="2xl" color="$primary600" fontFamily="GoogleSans-Bold">
             Glosapp
           </Heading>
-          <Text textAlign="center" size="lg" fontFamily="GoogleSans">
-            Aprende una palabra nueva cada día.
-            {"\n"}
-            Portugués 🇧🇷 ↔️ Español 🇪🇸
-          </Text>
+          <VStack space="sm" alignItems="center">
+            <Text textAlign="center" size="lg" fontFamily="GoogleSans">
+              Aprende una palabra nueva cada día.
+            </Text>
+            <HStack space="md" alignItems="center">
+              <Text size="lg" fontFamily="GoogleSans">Portugués</Text>
+              <MaterialCommunityIcons name="swap-horizontal" size={24} color={iconColor} />
+              <Text size="lg" fontFamily="GoogleSans">Español</Text>
+            </HStack>
+          </VStack>
 
           <Box mt="$8">
             <Button size="xl" variant="solid" action="primary" onPress={handleStart} isDisabled={loading}>

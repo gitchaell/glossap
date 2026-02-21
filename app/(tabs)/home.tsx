@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { Box, VStack, Text, Button, ButtonText, Heading, Center } from '@gluestack-ui/themed';
+import { Box, VStack, HStack, Text, Button, ButtonText, Heading, Center } from '@gluestack-ui/themed';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useToken } from '@gluestack-style/react';
 import {
   GetDailyContentUseCase,
   MarkAsLearnedUseCase,
@@ -32,6 +34,7 @@ export default function Home() {
   const [isLearned, setIsLearned] = useState(false);
   const [loading, setLoading] = useState(true);
   const insets = useSafeAreaInsets();
+  const primary600 = useToken('colors', 'primary600');
 
   useEffect(() => {
     loadData();
@@ -85,7 +88,10 @@ export default function Home() {
   return (
     <Box flex={1} bg="$backgroundLight0" p="$4" pt={insets.top}>
        <VStack space="md" alignItems="center" mt="$4">
-          <Heading size="md" color="$primary600">Racha: {streak?.currentStreak || 0} 🔥</Heading>
+          <HStack space="xs" alignItems="center">
+            <Heading size="md" color="$primary600">Racha: {streak?.currentStreak || 0}</Heading>
+            <MaterialCommunityIcons name="fire" size={24} color={primary600} />
+          </HStack>
        </VStack>
 
        <Center flex={1}>
