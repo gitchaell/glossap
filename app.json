@@ -21,6 +21,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "package": "com.glosapp.app",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
